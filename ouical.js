@@ -22,8 +22,9 @@
         '&text=' + (event.title || ''),
         '&dates=' + (startTime || ''),
         '/' + (endTime || ''),
-        '&details=' + (event.description || ''),
+        '&details=' + (event.description + '\n\n' + document.URL || ''),
         '&location=' + (event.address || ''),
+        '&ctz=' + event.timezone,
         '&sprop=&sprop=name:'
       ].join(''));
       return '<a class="icon-google" target="_blank" href="' +
@@ -78,6 +79,8 @@
           'SUMMARY:' + (event.title || ''),
           'DESCRIPTION:' + (event.description || ''),
           'LOCATION:' + (event.address || ''),
+          (event.repeat || ''), // the rrule from drupal is prefaced with
+            // RRULE: already
           'END:VEVENT',
           'END:VCALENDAR'].join('\n'));
 
